@@ -21,12 +21,15 @@ I build backend-heavy web platforms where money, orders and access rights have t
 
 ### Selected results from production work
 
-| Problem | What I did | Result |
+| Context | What I did | Result |
 | --- | --- | --- |
-| Slow catalog and checkout APIs | EF Core projections, `AsNoTracking`, keyset pagination | p95 ~800 ms → ~250 ms |
-| Credit decisions took days | Async scoring on Azure Service Bus inside the loan-origination workflow | ~2 days → under 4 hours |
-| Slow repayment reports | Fixed missing indexes and N+1 queries found in execution plans | 10× faster |
-| Paper visitor logs | Self-service kiosk check-in (React + ASP.NET Core) | ~3 min → under 1 min |
+| **Multi-vendor marketplace** (eCommerce) · catalog and checkout APIs slowed down on large product lists | Rewrote hot queries as EF Core projections with `AsNoTracking`, replaced offset paging with keyset pagination, added covering and filtered indexes on Azure SQL based on execution plans | p95 latency **~800 ms → ~250 ms** (~3× faster) |
+| **Multi-vendor marketplace** · order events between services could be lost or handled twice | Event-driven order flow on RabbitMQ + MassTransit with EF Core Transactional Outbox and idempotent consumers | **No lost or duplicate** order events |
+| **Multi-vendor marketplace** · storefront, seller portal and admin panel each had their own login | Moved all three apps to one identity provider: Auth0, OAuth 2.0 / OpenID Connect, role-based access | **3 separate logins → 1** single sign-on |
+| **SME lending platform** (FinTech) · credit decisions waited on manual underwriter work | Built the loan-origination workflow end to end (application → verification → scoring → e-signature): async scoring on Azure Service Bus, banking and registry APIs, DocuSign webhooks with idempotent handling | Credit decision time **~2 days → under 4 hours** |
+| **SME lending platform** · repayment and penalty reports were slow | Found missing indexes and N+1 queries in EF Core through execution plans and fixed them | Report generation **10× faster** |
+| **Smart office platform** (PropTech) · visitors signed paper logs at reception | Self-service kiosk check-in (React/Redux touch UI + ASP.NET Core API) with near-real-time host alerts over Azure Service Bus and RabbitMQ | Check-in **~3 min → under 1 min** per visitor |
+| **Smart office platform** · releases required downtime | Azure DevOps CI/CD with App Service deployment slots | **Zero-downtime** releases |
 
 Commercial code is under NDA — the repositories below show the same engineering in the open.
 
