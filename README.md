@@ -37,7 +37,7 @@ Commercial code is under NDA — the repositories below show the same engineerin
 
 | Project | What it shows | Stack |
 | --- | --- | --- |
-| [**InMarket**](https://github.com/raman-hrynevich/InMarket) | Multi-vendor marketplace: services talking over RabbitMQ/MassTransit, Auth0 and Keycloak side by side, real-time notifications with SignalR | .NET, EF Core, SQL Server, MongoDB, Hangfire, React 19, TypeScript |
+| [**InMarket**](https://github.com/raman-hrynevich/InMarket) | .NET microservices sandbox: Auth0 and Keycloak side by side behind a feature flag, RabbitMQ/MassTransit messaging, real-time notifications with SignalR | .NET, EF Core, SQL Server, MongoDB, Hangfire, React 19, TypeScript |
 | **LedgerFlow** *(in progress)* | Payments and double-entry ledger: idempotent APIs, Transactional Outbox, concurrency-safe balances, load-tested | .NET 10, EF Core, MassTransit, Aspire, Testcontainers |
 | **DocFlow AI** *(planned)* | Document intake with AI extraction, human review and an approval workflow — live on Azure | .NET 10, Azure Container Apps, Service Bus, Terraform, React |
 | [**JIT vs AOT**](https://github.com/raman-hrynevich/JITvsAOTPresentation) | Talk: JIT vs Native AOT compilation in .NET | reveal.js |
